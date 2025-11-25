@@ -1,0 +1,9 @@
+{
+	"name": "deeptechdatafactory",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "68db3012-2398-424a-9171-7176ec157966",
+		"tenantId": "c8577984-3a34-46bd-bd5d-7fa3725d3846"
+	}
+}
