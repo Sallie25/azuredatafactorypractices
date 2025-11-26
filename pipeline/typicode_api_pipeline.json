@@ -1,0 +1,7 @@
+{
+	"name": "typicode_api_pipeline",
+	"properties": {
+		"description": "Building a pipeline by ingesting data in json format through n API",
+		"annotations": []
+	}
+}
