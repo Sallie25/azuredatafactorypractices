@@ -1,0 +1,126 @@
+{
+	"name": "fitness_gym_input_dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "deeptech_AzureBlobStorage_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Fitness table",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Fitness_Membership_Analytics_Dataset.xlsx",
+				"container": "input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "ID",
+				"type": "String"
+			},
+			{
+				"name": "customerpk",
+				"type": "String"
+			},
+			{
+				"name": "age",
+				"type": "String"
+			},
+			{
+				"name": "membership_type",
+				"type": "String"
+			},
+			{
+				"name": "visit_per_week",
+				"type": "String"
+			},
+			{
+				"name": "Days_of_week",
+				"type": "String"
+			},
+			{
+				"name": "attend_group_lesson",
+				"type": "String"
+			},
+			{
+				"name": "avg_time_check_in",
+				"type": "String"
+			},
+			{
+				"name": "avg_time_check_out",
+				"type": "String"
+			},
+			{
+				"name": "duration_in_gym_minutes",
+				"type": "String"
+			},
+			{
+				"name": "has_drink_subscription",
+				"type": "String"
+			},
+			{
+				"name": "personal_training",
+				"type": "String"
+			},
+			{
+				"name": "uses_sauna",
+				"type": "String"
+			},
+			{
+				"name": "self_identified_gender",
+				"type": "String"
+			},
+			{
+				"name": "subscription_price",
+				"type": "String"
+			},
+			{
+				"name": "subscription_model",
+				"type": "String"
+			},
+			{
+				"name": "adjusted_price",
+				"type": "String"
+			},
+			{
+				"name": "discount type_fk",
+				"type": "String"
+			},
+			{
+				"name": "discount_rate",
+				"type": "String"
+			},
+			{
+				"name": "final_price",
+				"type": "String"
+			},
+			{
+				"name": "access_hours",
+				"type": "String"
+			},
+			{
+				"name": "Location_fk",
+				"type": "String"
+			},
+			{
+				"name": "join_date",
+				"type": "String"
+			},
+			{
+				"name": "personal_training_hours",
+				"type": "String"
+			},
+			{
+				"name": "multi_location_access",
+				"type": "String"
+			},
+			{
+				"name": "last_visit_date",
+				"type": "String"
+			}
+		]
+	}
+}
