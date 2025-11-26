@@ -7,6 +7,18 @@
 		},
 		"deeptech_AzureBlobStorage_LS_connectionString": {
 			"value": ""
+		},
+		"deeptech_AzureSqlDatabase_LS_password": {
+			"value": ""
+		},
+		"deeptech_AzureSqlDatabase_LS_properties_typeProperties_server": {
+			"value": "deeptech-salome-sql-server.database.windows.net"
+		},
+		"deeptech_AzureSqlDatabase_LS_properties_typeProperties_database": {
+			"value": "deeptech-sql-db"
+		},
+		"deeptech_AzureSqlDatabase_LS_properties_typeProperties_userName": {
+			"value": "deeptech-salome"
 		}
 	}
 }

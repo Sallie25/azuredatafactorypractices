@@ -11,6 +11,22 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'deeptech_AzureBlobStorage_LS'"
 		},
+		"deeptech_AzureSqlDatabase_LS_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'deeptech_AzureSqlDatabase_LS'"
+		},
+		"deeptech_AzureSqlDatabase_LS_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "deeptech-salome-sql-server.database.windows.net"
+		},
+		"deeptech_AzureSqlDatabase_LS_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "deeptech-sql-db"
+		},
+		"deeptech_AzureSqlDatabase_LS_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "deeptech-salome"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -40,6 +56,18 @@
 					},
 					"deeptech_AzureBlobStorage_LS_connectionString": {
 						"value": "[parameters('deeptech_AzureBlobStorage_LS_connectionString')]"
+					},
+					"deeptech_AzureSqlDatabase_LS_password": {
+						"value": "[parameters('deeptech_AzureSqlDatabase_LS_password')]"
+					},
+					"deeptech_AzureSqlDatabase_LS_properties_typeProperties_server": {
+						"value": "[parameters('deeptech_AzureSqlDatabase_LS_properties_typeProperties_server')]"
+					},
+					"deeptech_AzureSqlDatabase_LS_properties_typeProperties_database": {
+						"value": "[parameters('deeptech_AzureSqlDatabase_LS_properties_typeProperties_database')]"
+					},
+					"deeptech_AzureSqlDatabase_LS_properties_typeProperties_userName": {
+						"value": "[parameters('deeptech_AzureSqlDatabase_LS_properties_typeProperties_userName')]"
 					}
 				}
 			},

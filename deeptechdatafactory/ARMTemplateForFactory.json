@@ -10,6 +10,22 @@
 		"deeptech_AzureBlobStorage_LS_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'deeptech_AzureBlobStorage_LS'"
+		},
+		"deeptech_AzureSqlDatabase_LS_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'deeptech_AzureSqlDatabase_LS'"
+		},
+		"deeptech_AzureSqlDatabase_LS_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "deeptech-salome-sql-server.database.windows.net"
+		},
+		"deeptech_AzureSqlDatabase_LS_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "deeptech-sql-db"
+		},
+		"deeptech_AzureSqlDatabase_LS_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "deeptech-salome"
 		}
 	},
 	"variables": {
@@ -263,6 +279,248 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/food_delivery_pipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "This pipeline configures a copy activity in ADF to ingest data from Azure Blob Storage and automatically create and load it into a new table in Azure SQL Database.",
+				"activities": [
+					{
+						"name": "Activity1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false,
+								"tableOption": "autoCreate",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "food_delivery_input_dataset",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "food_delivery_sql_sink_dataset",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/food_delivery_input_dataset')]",
+				"[concat(variables('factoryId'), '/datasets/food_delivery_sql_sink_dataset')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/food_delivery_input_dataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "deeptech_AzureBlobStorage_LS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "food_delivery_dataset.csv",
+						"container": "input"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "order_id",
+						"type": "String"
+					},
+					{
+						"name": "order_date",
+						"type": "String"
+					},
+					{
+						"name": "order_time",
+						"type": "String"
+					},
+					{
+						"name": "day_of_week",
+						"type": "String"
+					},
+					{
+						"name": "time_slot",
+						"type": "String"
+					},
+					{
+						"name": "restaurant_name",
+						"type": "String"
+					},
+					{
+						"name": "cuisine_type",
+						"type": "String"
+					},
+					{
+						"name": "customer_id",
+						"type": "String"
+					},
+					{
+						"name": "delivery_city",
+						"type": "String"
+					},
+					{
+						"name": "delivery_distance_km",
+						"type": "String"
+					},
+					{
+						"name": "order_value",
+						"type": "String"
+					},
+					{
+						"name": "delivery_fee",
+						"type": "String"
+					},
+					{
+						"name": "tip_amount",
+						"type": "String"
+					},
+					{
+						"name": "total_amount",
+						"type": "String"
+					},
+					{
+						"name": "payment_method",
+						"type": "String"
+					},
+					{
+						"name": "delivery_time_minutes",
+						"type": "String"
+					},
+					{
+						"name": "driver_id",
+						"type": "String"
+					},
+					{
+						"name": "weather_condition",
+						"type": "String"
+					},
+					{
+						"name": "order_status",
+						"type": "String"
+					},
+					{
+						"name": "customer_rating",
+						"type": "String"
+					},
+					{
+						"name": "number_of_items",
+						"type": "String"
+					},
+					{
+						"name": "promotional_discount",
+						"type": "String"
+					},
+					{
+						"name": "is_repeat_customer",
+						"type": "String"
+					},
+					{
+						"name": "delivery_instructions",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/deeptech_AzureBlobStorage_LS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/deeptech_AzureSqlDatabase_LS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('deeptech_AzureSqlDatabase_LS_properties_typeProperties_server')]",
+					"database": "[parameters('deeptech_AzureSqlDatabase_LS_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('deeptech_AzureSqlDatabase_LS_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('deeptech_AzureSqlDatabase_LS_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/food_delivery_sql_sink_dataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "deeptech_AzureSqlDatabase_LS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "deeptech_sink_table"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/deeptech_AzureSqlDatabase_LS')]"
+			]
 		}
 	]
 }
