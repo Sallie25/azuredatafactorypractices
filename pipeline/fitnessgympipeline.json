@@ -1,7 +1,7 @@
 {
 	"name": "fitnessgympipeline",
 	"properties": {
-		"description": "This pipeline shows the ETL process carried out on  fitness_gym dataset in completion of the task assigned by the deeptech data engineering programme",
+		"description": "This pipeline shows the ETL process carried out on  fitness_gym dataset in completion of the task assigned by the deeptech data engineering programme. Here we configure a copy activity in ADF to transfer data from a source to sink container in azure blob storage",
 		"annotations": []
 	}
 }
