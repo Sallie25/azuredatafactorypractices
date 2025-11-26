@@ -1,0 +1,17 @@
+{
+	"name": "deeptech_AzureSqlDatabase_LS",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "deeptech-salome-sql-server.database.windows.net",
+			"database": "deeptech-sql-db",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "deeptech-salome",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDJBQTkyODE4LTE5ODQtNDE5Ri05OEU0LTJFMTExNTE0ODc1Nl9mMThkOTVjMy1mMDZjLTRhYjMtYTAyYi0wM2Q1ODFlY2I1ZTkiDQp9"
+		}
+	}
+}
