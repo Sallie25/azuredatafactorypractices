@@ -1,0 +1,7 @@
+{
+	"name": "fitnessgympipeline",
+	"properties": {
+		"description": "This pipeline shows the ETL process carried out on  fitness_gym dataset in completion of the task assigned by the deeptech data engineering programme",
+		"annotations": []
+	}
+}
