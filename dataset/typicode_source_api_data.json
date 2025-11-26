@@ -1,0 +1,12 @@
+{
+	"name": "typicode_source_api_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "API_RestServices_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
