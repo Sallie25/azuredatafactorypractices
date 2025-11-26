@@ -1,0 +1,7 @@
+{
+	"name": "food_delivery_pipeline",
+	"properties": {
+		"description": "This pipeline configures a copy activity in ADF to ingest data from Azure Blob Storage and automatically create and load it into a new table in Azure SQL Database.",
+		"annotations": []
+	}
+}
