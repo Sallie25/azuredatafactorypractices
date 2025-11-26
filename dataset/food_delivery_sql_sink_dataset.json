@@ -1,0 +1,16 @@
+{
+	"name": "food_delivery_sql_sink_dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "deeptech_AzureSqlDatabase_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "deeptech_sink_table"
+		}
+	}
+}
