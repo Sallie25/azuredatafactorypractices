@@ -414,6 +414,361 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/BookSales_April_data')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "deeptech_AzureBlobStorage_LS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Book_Sales_April.xlsx",
+						"container": "input"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Purchase ID",
+						"type": "String"
+					},
+					{
+						"name": "Customer ID",
+						"type": "String"
+					},
+					{
+						"name": "Book",
+						"type": "String"
+					},
+					{
+						"name": "Audience",
+						"type": "String"
+					},
+					{
+						"name": "Genre",
+						"type": "String"
+					},
+					{
+						"name": "Price",
+						"type": "String"
+					},
+					{
+						"name": "Book Rating",
+						"type": "String"
+					},
+					{
+						"name": "Purchase Location",
+						"type": "String"
+					},
+					{
+						"name": "Purchase Date",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/deeptech_AzureBlobStorage_LS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Booksalesdata')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "deeptech_AzureBlobStorage_LS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Booksalesdata",
+						"container": "output"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/deeptech_AzureBlobStorage_LS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PenSales_data')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "deeptech_AzureBlobStorage_LS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Pen Sales",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Pen Sales Data.xlsx",
+						"container": "input"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Customer",
+						"type": "String"
+					},
+					{
+						"name": "Item",
+						"type": "String"
+					},
+					{
+						"name": "Pen Cost",
+						"type": "String"
+					},
+					{
+						"name": "Shipping Cost",
+						"type": "String"
+					},
+					{
+						"name": "Purchase Date",
+						"type": "String"
+					},
+					{
+						"name": "Delivery Date",
+						"type": "String"
+					},
+					{
+						"name": "Review",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/deeptech_AzureBlobStorage_LS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PenSalesdata')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "deeptech_AzureBlobStorage_LS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "PenSalesdata",
+						"container": "output"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/deeptech_AzureBlobStorage_LS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PenSaless_data')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "deeptech_AzureBlobStorage_LS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Pen Sales",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Pen Sales Data.xlsx",
+						"container": "input"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Customer",
+						"type": "String"
+					},
+					{
+						"name": "Item",
+						"type": "String"
+					},
+					{
+						"name": "Pen Cost",
+						"type": "String"
+					},
+					{
+						"name": "Shipping Cost",
+						"type": "String"
+					},
+					{
+						"name": "Purchase Date",
+						"type": "String"
+					},
+					{
+						"name": "Delivery Date",
+						"type": "String"
+					},
+					{
+						"name": "Review",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/deeptech_AzureBlobStorage_LS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/bookSalesJune_data')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "deeptech_AzureBlobStorage_LS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Book_Sales_June.xlsx",
+						"container": "input"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Purchase ID",
+						"type": "String"
+					},
+					{
+						"name": "Customer ID",
+						"type": "String"
+					},
+					{
+						"name": "Book",
+						"type": "String"
+					},
+					{
+						"name": "Audience",
+						"type": "String"
+					},
+					{
+						"name": "Genre",
+						"type": "String"
+					},
+					{
+						"name": "Price",
+						"type": "String"
+					},
+					{
+						"name": "Book Rating",
+						"type": "String"
+					},
+					{
+						"name": "Purchase Location",
+						"type": "String"
+					},
+					{
+						"name": "Purchase Date",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/deeptech_AzureBlobStorage_LS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/bookSalesMay')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "deeptech_AzureBlobStorage_LS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Book_Sales_May.xlsx",
+						"container": "input"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Purchase ID",
+						"type": "String"
+					},
+					{
+						"name": "Customer ID",
+						"type": "String"
+					},
+					{
+						"name": "Book",
+						"type": "String"
+					},
+					{
+						"name": "Audience",
+						"type": "String"
+					},
+					{
+						"name": "Genre",
+						"type": "String"
+					},
+					{
+						"name": "Price",
+						"type": "String"
+					},
+					{
+						"name": "Book Rating",
+						"type": "String"
+					},
+					{
+						"name": "Purchase Location",
+						"type": "String"
+					},
+					{
+						"name": "Purchase Date",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/deeptech_AzureBlobStorage_LS')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/fitness_gym_input_dataset')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -719,6 +1074,41 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/penCostdata')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "deeptech_AzureBlobStorage_LS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Pen Costs",
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Pen Sales Data.xlsx",
+						"container": "input"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Pen",
+						"type": "String"
+					},
+					{
+						"name": "Cost",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/deeptech_AzureBlobStorage_LS')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/typicode_source_api_data')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -805,15 +1195,197 @@
 				"type": "ScheduleTrigger",
 				"typeProperties": {
 					"recurrence": {
-						"frequency": "Minute",
-						"interval": 15,
+						"frequency": "Day",
+						"interval": 29,
 						"startTime": "2025-11-27T00:00:00",
-						"timeZone": "W. Central Africa Standard Time"
+						"timeZone": "W. Central Africa Standard Time",
+						"schedule": {}
 					}
 				}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/fitnessgympipeline')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PenSales_dataflow')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "PenSaless_data",
+								"type": "DatasetReference"
+							},
+							"name": "penSalesdataflow"
+						},
+						{
+							"dataset": {
+								"referenceName": "penCostdata",
+								"type": "DatasetReference"
+							},
+							"name": "penCostdataflow"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "PenSalesdata",
+								"type": "DatasetReference"
+							},
+							"name": "PenSalesdata"
+						}
+					],
+					"transformations": [
+						{
+							"name": "joinedpenSalesCostdata"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          Customer as string,",
+						"          Item as string,",
+						"          {Pen Cost} as string,",
+						"          {Shipping Cost} as string,",
+						"          {Purchase Date} as string,",
+						"          {Delivery Date} as string,",
+						"          Review as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> penSalesdataflow",
+						"source(output(",
+						"          Pen as string,",
+						"          Cost as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> penCostdataflow",
+						"penSalesdataflow, penCostdataflow join(Item == Pen,",
+						"     joinType:'inner',",
+						"     matchType:'exact',",
+						"     ignoreSpaces: false,",
+						"     broadcast: 'auto')~> joinedpenSalesCostdata",
+						"joinedpenSalesCostdata sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> PenSalesdata"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/PenSaless_data')]",
+				"[concat(variables('factoryId'), '/datasets/penCostdata')]",
+				"[concat(variables('factoryId'), '/datasets/PenSalesdata')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/bookSalesdataflow')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "BookSales_April_data",
+								"type": "DatasetReference"
+							},
+							"name": "bookSalesApr",
+							"description": "Added a booksales dataset for the month of April"
+						},
+						{
+							"dataset": {
+								"referenceName": "bookSalesMay",
+								"type": "DatasetReference"
+							},
+							"name": "bookSalesMay",
+							"description": "Added a booksales dataset for the month of May source dataset"
+						},
+						{
+							"dataset": {
+								"referenceName": "bookSalesJune_data",
+								"type": "DatasetReference"
+							},
+							"name": "bookSalesJune",
+							"description": "Added a booksales dataset for the month of June source dataset"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "Booksalesdata",
+								"type": "DatasetReference"
+							},
+							"name": "BooksSalesDataforallMonths"
+						}
+					],
+					"transformations": [
+						{
+							"name": "ConcatenationofAprtoJune"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          {Purchase ID} as string,",
+						"          {Customer ID} as string,",
+						"          Book as string,",
+						"          Audience as string,",
+						"          Genre as string,",
+						"          Price as string,",
+						"          {Book Rating} as string,",
+						"          {Purchase Location} as string,",
+						"          {Purchase Date} as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     limit: 100,",
+						"     ignoreNoFilesFound: false) ~> bookSalesApr",
+						"source(output(",
+						"          {Purchase ID} as string,",
+						"          {Customer ID} as string,",
+						"          Book as string,",
+						"          Audience as string,",
+						"          Genre as string,",
+						"          Price as string,",
+						"          {Book Rating} as string,",
+						"          {Purchase Location} as string,",
+						"          {Purchase Date} as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> bookSalesMay",
+						"source(output(",
+						"          {Purchase ID} as string,",
+						"          {Customer ID} as string,",
+						"          Book as string,",
+						"          Audience as string,",
+						"          Genre as string,",
+						"          Price as string,",
+						"          {Book Rating} as string,",
+						"          {Purchase Location} as string,",
+						"          {Purchase Date} as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> bookSalesJune",
+						"bookSalesApr, bookSalesMay, bookSalesJune union(byName: true)~> ConcatenationofAprtoJune",
+						"ConcatenationofAprtoJune sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> BooksSalesDataforallMonths"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/BookSales_April_data')]",
+				"[concat(variables('factoryId'), '/datasets/bookSalesMay')]",
+				"[concat(variables('factoryId'), '/datasets/bookSalesJune_data')]",
+				"[concat(variables('factoryId'), '/datasets/Booksalesdata')]"
 			]
 		}
 	]
