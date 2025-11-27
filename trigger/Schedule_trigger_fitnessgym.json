@@ -7,8 +7,8 @@
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
-				"frequency": "Minute",
-				"interval": 15,
+				"frequency": "Day",
+				"interval": 28,
 				"startTime": "2025-11-27T00:00:00",
 				"timeZone": "W. Central Africa Standard Time"
 			}
