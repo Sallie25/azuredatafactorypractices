@@ -10,10 +10,21 @@
 						"type": "DatasetReference"
 					},
 					"name": "penSalesdataflow"
+				},
+				{
+					"dataset": {
+						"referenceName": "penCostdata",
+						"type": "DatasetReference"
+					},
+					"name": "penCostdataflow"
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "joinedpenSalesCostdata"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          Customer as string,",
@@ -26,7 +37,19 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> penSalesdataflow"
+				"     ignoreNoFilesFound: false) ~> penSalesdataflow",
+				"source(output(",
+				"          Pen as string,",
+				"          Cost as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> penCostdataflow",
+				"penSalesdataflow, penCostdataflow join(Item == Pen,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> joinedpenSalesCostdata"
 			]
 		}
 	}
