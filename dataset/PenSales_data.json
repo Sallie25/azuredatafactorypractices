@@ -1,0 +1,50 @@
+{
+	"name": "PenSales_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "deeptech_AzureBlobStorage_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Pen Sales",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Pen Sales Data.xlsx",
+				"container": "input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Customer",
+				"type": "String"
+			},
+			{
+				"name": "Item",
+				"type": "String"
+			},
+			{
+				"name": "Pen Cost",
+				"type": "String"
+			},
+			{
+				"name": "Shipping Cost",
+				"type": "String"
+			},
+			{
+				"name": "Purchase Date",
+				"type": "String"
+			},
+			{
+				"name": "Delivery Date",
+				"type": "String"
+			},
+			{
+				"name": "Review",
+				"type": "String"
+			}
+		]
+	}
+}

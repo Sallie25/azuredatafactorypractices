@@ -19,7 +19,15 @@
 					"name": "penCostdataflow"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "PenSalesdata",
+						"type": "DatasetReference"
+					},
+					"name": "PenSalesdata"
+				}
+			],
 			"transformations": [
 				{
 					"name": "joinedpenSalesCostdata"
@@ -49,7 +57,11 @@
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> joinedpenSalesCostdata"
+				"     broadcast: 'auto')~> joinedpenSalesCostdata",
+				"joinedpenSalesCostdata sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> PenSalesdata"
 			]
 		}
 	}

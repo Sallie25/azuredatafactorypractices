@@ -1,0 +1,85 @@
+{
+	"name": "bookSalesdataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "BookSales_April_data",
+						"type": "DatasetReference"
+					},
+					"name": "bookSalesApr",
+					"description": "Added a booksales dataset for the month of April"
+				},
+				{
+					"dataset": {
+						"referenceName": "bookSalesMay",
+						"type": "DatasetReference"
+					},
+					"name": "bookSalesMay",
+					"description": "Added a booksales dataset for the month of May source dataset"
+				},
+				{
+					"dataset": {
+						"referenceName": "bookSalesJune_data",
+						"type": "DatasetReference"
+					},
+					"name": "bookSalesJune",
+					"description": "Added a booksales dataset for the month of June source dataset"
+				},
+				{
+					"name": "source2"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          {Purchase ID} as string,",
+				"          {Customer ID} as string,",
+				"          Book as string,",
+				"          Audience as string,",
+				"          Genre as string,",
+				"          Price as string,",
+				"          {Book Rating} as string,",
+				"          {Purchase Location} as string,",
+				"          {Purchase Date} as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> bookSalesApr",
+				"source(output(",
+				"          {Purchase ID} as string,",
+				"          {Customer ID} as string,",
+				"          Book as string,",
+				"          Audience as string,",
+				"          Genre as string,",
+				"          Price as string,",
+				"          {Book Rating} as string,",
+				"          {Purchase Location} as string,",
+				"          {Purchase Date} as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> bookSalesMay",
+				"source(output(",
+				"          {Purchase ID} as string,",
+				"          {Customer ID} as string,",
+				"          Book as string,",
+				"          Audience as string,",
+				"          Genre as string,",
+				"          Price as string,",
+				"          {Book Rating} as string,",
+				"          {Purchase Location} as string,",
+				"          {Purchase Date} as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> bookSalesJune",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> source2"
+			]
+		}
+	}
+}

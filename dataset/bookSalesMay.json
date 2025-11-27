@@ -1,0 +1,58 @@
+{
+	"name": "bookSalesMay",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "deeptech_AzureBlobStorage_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Sheet1",
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Book_Sales_May.xlsx",
+				"container": "input"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Purchase ID",
+				"type": "String"
+			},
+			{
+				"name": "Customer ID",
+				"type": "String"
+			},
+			{
+				"name": "Book",
+				"type": "String"
+			},
+			{
+				"name": "Audience",
+				"type": "String"
+			},
+			{
+				"name": "Genre",
+				"type": "String"
+			},
+			{
+				"name": "Price",
+				"type": "String"
+			},
+			{
+				"name": "Book Rating",
+				"type": "String"
+			},
+			{
+				"name": "Purchase Location",
+				"type": "String"
+			},
+			{
+				"name": "Purchase Date",
+				"type": "String"
+			}
+		]
+	}
+}
