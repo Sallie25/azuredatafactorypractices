@@ -27,6 +27,10 @@
 			"type": "string",
 			"defaultValue": "deeptech-salome"
 		},
+		"API_RestServices_LS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://jsonplaceholder.typicode.com/posts"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -68,6 +72,9 @@
 					},
 					"deeptech_AzureSqlDatabase_LS_properties_typeProperties_userName": {
 						"value": "[parameters('deeptech_AzureSqlDatabase_LS_properties_typeProperties_userName')]"
+					},
+					"API_RestServices_LS_properties_typeProperties_url": {
+						"value": "[parameters('API_RestServices_LS_properties_typeProperties_url')]"
 					}
 				}
 			},

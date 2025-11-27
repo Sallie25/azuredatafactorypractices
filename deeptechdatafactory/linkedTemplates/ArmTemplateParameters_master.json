@@ -20,6 +20,9 @@
 		"deeptech_AzureSqlDatabase_LS_properties_typeProperties_userName": {
 			"value": "deeptech-salome"
 		},
+		"API_RestServices_LS_properties_typeProperties_url": {
+			"value": "https://jsonplaceholder.typicode.com/posts"
+		},
 		"containerUri": {
 			"value": ""
 		},
