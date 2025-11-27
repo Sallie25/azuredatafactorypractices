@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'deeptech_AzureSqlDatabase_LS'"
 		},
+		"API_RestServices_LS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://jsonplaceholder.typicode.com/posts"
+		},
 		"deeptech_AzureSqlDatabase_LS_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "deeptech-salome-sql-server.database.windows.net"
@@ -26,16 +30,27 @@
 		"deeptech_AzureSqlDatabase_LS_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "deeptech-salome"
-		},
-		"API_RestServices_LS_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://jsonplaceholder.typicode.com/posts"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/API_RestServices_LS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "RestService",
+				"typeProperties": {
+					"url": "[parameters('API_RestServices_LS_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/deeptech_AzureBlobStorage_LS')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -72,19 +87,98 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/API_RestServices_LS')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"name": "[concat(parameters('factoryName'), '/API_csv_sink_data')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
+				"linkedServiceName": {
+					"referenceName": "deeptech_AzureBlobStorage_LS",
+					"type": "LinkedServiceReference"
+				},
 				"annotations": [],
-				"type": "RestService",
+				"type": "DelimitedText",
 				"typeProperties": {
-					"url": "[parameters('API_RestServices_LS_properties_typeProperties_url')]",
-					"enableServerCertificateValidation": true,
-					"authenticationType": "Anonymous"
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "typicode_csv_data",
+						"container": "output"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/deeptech_AzureBlobStorage_LS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/API_json_sink_data')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "deeptech_AzureBlobStorage_LS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "typicode_API_json_data",
+						"container": "output"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/deeptech_AzureBlobStorage_LS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/API_sink_dataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "deeptech_AzureSqlDatabase_LS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "typicode_api_table"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/deeptech_AzureSqlDatabase_LS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/API_sql_test_data')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "deeptech_AzureSqlDatabase_LS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "API_sql_test_data"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/deeptech_AzureSqlDatabase_LS')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/fitness_gym_input_dataset')]",
@@ -410,51 +504,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/API_sink_dataset')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "deeptech_AzureSqlDatabase_LS",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "typicode_api_table"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/deeptech_AzureSqlDatabase_LS')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/API_json_sink_data')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "deeptech_AzureBlobStorage_LS",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "typicode_API_json_data",
-						"container": "output"
-					}
-				},
-				"schema": {}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/deeptech_AzureBlobStorage_LS')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/fitnessgympipeline')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -612,7 +661,7 @@
 				"description": "Building a pipeline by ingesting data in json format through n API",
 				"activities": [
 					{
-						"name": "API copy activity",
+						"name": "API to Blob copy activity",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -634,12 +683,14 @@
 								}
 							},
 							"sink": {
-								"type": "JsonSink",
+								"type": "DelimitedTextSink",
 								"storeSettings": {
 									"type": "AzureBlobStorageWriteSettings"
 								},
 								"formatSettings": {
-									"type": "JsonWriteSettings"
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
 								}
 							},
 							"enableStaging": false
@@ -653,7 +704,71 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "API_json_sink_data",
+								"referenceName": "API_csv_sink_data",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Blob to DB copy activity",
+						"description": "This creates a copy of the data that was ingested to be stored in the SQL database for the software team.",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "API to Blob copy activity",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false,
+								"tableOption": "autoCreate",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "API_csv_sink_data",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "API_sql_test_data",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -667,7 +782,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/typicode_source_api_data')]",
-				"[concat(variables('factoryId'), '/datasets/API_json_sink_data')]"
+				"[concat(variables('factoryId'), '/datasets/API_csv_sink_data')]",
+				"[concat(variables('factoryId'), '/datasets/API_sql_test_data')]"
 			]
 		}
 	]

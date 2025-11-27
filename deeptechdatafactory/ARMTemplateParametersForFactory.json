@@ -11,6 +11,9 @@
 		"deeptech_AzureSqlDatabase_LS_password": {
 			"value": ""
 		},
+		"API_RestServices_LS_properties_typeProperties_url": {
+			"value": "https://jsonplaceholder.typicode.com/posts"
+		},
 		"deeptech_AzureSqlDatabase_LS_properties_typeProperties_server": {
 			"value": "deeptech-salome-sql-server.database.windows.net"
 		},
@@ -19,9 +22,6 @@
 		},
 		"deeptech_AzureSqlDatabase_LS_properties_typeProperties_userName": {
 			"value": "deeptech-salome"
-		},
-		"API_RestServices_LS_properties_typeProperties_url": {
-			"value": "https://jsonplaceholder.typicode.com/posts"
 		}
 	}
 }

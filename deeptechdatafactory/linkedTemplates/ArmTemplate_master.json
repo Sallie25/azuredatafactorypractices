@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'deeptech_AzureSqlDatabase_LS'"
 		},
+		"API_RestServices_LS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://jsonplaceholder.typicode.com/posts"
+		},
 		"deeptech_AzureSqlDatabase_LS_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "deeptech-salome-sql-server.database.windows.net"
@@ -26,10 +30,6 @@
 		"deeptech_AzureSqlDatabase_LS_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "deeptech-salome"
-		},
-		"API_RestServices_LS_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://jsonplaceholder.typicode.com/posts"
 		},
 		"containerUri": {
 			"type": "string",
@@ -64,6 +64,9 @@
 					"deeptech_AzureSqlDatabase_LS_password": {
 						"value": "[parameters('deeptech_AzureSqlDatabase_LS_password')]"
 					},
+					"API_RestServices_LS_properties_typeProperties_url": {
+						"value": "[parameters('API_RestServices_LS_properties_typeProperties_url')]"
+					},
 					"deeptech_AzureSqlDatabase_LS_properties_typeProperties_server": {
 						"value": "[parameters('deeptech_AzureSqlDatabase_LS_properties_typeProperties_server')]"
 					},
@@ -72,9 +75,6 @@
 					},
 					"deeptech_AzureSqlDatabase_LS_properties_typeProperties_userName": {
 						"value": "[parameters('deeptech_AzureSqlDatabase_LS_properties_typeProperties_userName')]"
-					},
-					"API_RestServices_LS_properties_typeProperties_url": {
-						"value": "[parameters('API_RestServices_LS_properties_typeProperties_url')]"
 					}
 				}
 			},
