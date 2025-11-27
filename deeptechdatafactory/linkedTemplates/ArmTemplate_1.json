@@ -320,6 +320,9 @@
 					"transformations": [
 						{
 							"name": "joinedpenSalesCostdata"
+						},
+						{
+							"name": "selectRequiredcolumns"
 						}
 					],
 					"scriptLines": [
@@ -347,7 +350,18 @@
 						"     matchType:'exact',",
 						"     ignoreSpaces: false,",
 						"     broadcast: 'auto')~> joinedpenSalesCostdata",
-						"joinedpenSalesCostdata sink(allowSchemaDrift: true,",
+						"joinedpenSalesCostdata select(mapColumn(",
+						"          Customer,",
+						"          Item,",
+						"          {Pen Cost},",
+						"          {Shipping Cost},",
+						"          {Purchase Date},",
+						"          {Delivery Date},",
+						"          Review",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> selectRequiredcolumns",
+						"selectRequiredcolumns sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> PenSalesdata"
@@ -486,6 +500,101 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/fitnessgympipeline')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Pen_Sales_dataflow_pipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Pen_Sales_dataflow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "PenSales_dataflow",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"penSalesdataflow": {},
+									"penCostdataflow": {},
+									"PenSalesdata": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/PenSales_dataflow')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BookSales_dataflow_pipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "BookSales_dataflow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "bookSalesdataflow",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"bookSalesApr": {},
+									"bookSalesMay": {},
+									"bookSalesJune": {},
+									"BooksSalesDataforallMonths": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/dataflows/bookSalesdataflow')]"
 			]
 		}
 	]
