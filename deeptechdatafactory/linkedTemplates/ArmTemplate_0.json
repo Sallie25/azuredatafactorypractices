@@ -431,6 +431,30 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/API_json_sink_data')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "deeptech_AzureBlobStorage_LS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "typicode_API_json_data",
+						"container": "output"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/deeptech_AzureBlobStorage_LS')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/fitnessgympipeline')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -610,11 +634,13 @@
 								}
 							},
 							"sink": {
-								"type": "AzureSqlSink",
-								"writeBehavior": "insert",
-								"sqlWriterUseTableLock": false,
-								"tableOption": "autoCreate",
-								"disableMetricsCollection": false
+								"type": "JsonSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "JsonWriteSettings"
+								}
 							},
 							"enableStaging": false
 						},
@@ -627,7 +653,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "API_sink_dataset",
+								"referenceName": "API_json_sink_data",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -641,7 +667,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/typicode_source_api_data')]",
-				"[concat(variables('factoryId'), '/datasets/API_sink_dataset')]"
+				"[concat(variables('factoryId'), '/datasets/API_json_sink_data')]"
 			]
 		}
 	]
