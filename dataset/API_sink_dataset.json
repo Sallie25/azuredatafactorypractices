@@ -1,0 +1,16 @@
+{
+	"name": "API_sink_dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "deeptech_AzureSqlDatabase_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "typicode_api_table"
+		}
+	}
+}
