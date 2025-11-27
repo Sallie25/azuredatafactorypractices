@@ -27,13 +27,22 @@
 					},
 					"name": "bookSalesJune",
 					"description": "Added a booksales dataset for the month of June source dataset"
-				},
-				{
-					"name": "source2"
 				}
 			],
-			"sinks": [],
-			"transformations": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Booksalesdata",
+						"type": "DatasetReference"
+					},
+					"name": "BooksSalesDataforallMonths"
+				}
+			],
+			"transformations": [
+				{
+					"name": "ConcatenationofAprtoJune"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          {Purchase ID} as string,",
@@ -48,6 +57,7 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     limit: 100,",
 				"     ignoreNoFilesFound: false) ~> bookSalesApr",
 				"source(output(",
 				"          {Purchase ID} as string,",
@@ -77,8 +87,11 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> bookSalesJune",
-				"source(allowSchemaDrift: true,",
-				"     validateSchema: false) ~> source2"
+				"bookSalesApr, bookSalesMay, bookSalesJune union(byName: true)~> ConcatenationofAprtoJune",
+				"ConcatenationofAprtoJune sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> BooksSalesDataforallMonths"
 			]
 		}
 	}
