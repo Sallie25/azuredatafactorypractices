@@ -31,6 +31,9 @@
 			"transformations": [
 				{
 					"name": "joinedpenSalesCostdata"
+				},
+				{
+					"name": "selectRequiredcolumns"
 				}
 			],
 			"scriptLines": [
@@ -58,7 +61,18 @@
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> joinedpenSalesCostdata",
-				"joinedpenSalesCostdata sink(allowSchemaDrift: true,",
+				"joinedpenSalesCostdata select(mapColumn(",
+				"          Customer,",
+				"          Item,",
+				"          {Pen Cost},",
+				"          {Shipping Cost},",
+				"          {Purchase Date},",
+				"          {Delivery Date},",
+				"          Review",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selectRequiredcolumns",
+				"selectRequiredcolumns sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> PenSalesdata"
