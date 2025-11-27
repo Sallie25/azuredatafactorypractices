@@ -1,0 +1,16 @@
+{
+	"name": "API_sql_test_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "deeptech_AzureSqlDatabase_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "API_sql_test_data"
+		}
+	}
+}

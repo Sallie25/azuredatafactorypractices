@@ -4,7 +4,7 @@
 		"description": "Building a pipeline by ingesting data in json format through n API",
 		"activities": [
 			{
-				"name": "API copy activity",
+				"name": "API to Blob copy activity",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -47,6 +47,68 @@
 				"outputs": [
 					{
 						"referenceName": "API_csv_sink_data",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Blob to DB copy activity",
+				"description": "This creates a copy of the data that was ingested to be stored in the SQL database for the software team.",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "API to Blob copy activity",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "API_csv_sink_data",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "API_sql_test_data",
 						"type": "DatasetReference"
 					}
 				]
