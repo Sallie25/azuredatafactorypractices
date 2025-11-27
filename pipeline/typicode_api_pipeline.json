@@ -26,11 +26,13 @@
 						}
 					},
 					"sink": {
-						"type": "AzureSqlSink",
-						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false,
-						"tableOption": "autoCreate",
-						"disableMetricsCollection": false
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
 					},
 					"enableStaging": false
 				},
@@ -42,7 +44,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "API_sink_dataset",
+						"referenceName": "API_json_sink_data",
 						"type": "DatasetReference"
 					}
 				]

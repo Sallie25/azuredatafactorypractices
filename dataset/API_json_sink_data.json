@@ -1,0 +1,19 @@
+{
+	"name": "API_json_sink_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "deeptech_AzureBlobStorage_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "typicode_API_json_data",
+				"container": "output"
+			}
+		},
+		"schema": {}
+	}
+}
