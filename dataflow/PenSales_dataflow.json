@@ -1,0 +1,33 @@
+{
+	"name": "PenSales_dataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "PenSaless_data",
+						"type": "DatasetReference"
+					},
+					"name": "penSalesdataflow"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          Customer as string,",
+				"          Item as string,",
+				"          {Pen Cost} as string,",
+				"          {Shipping Cost} as string,",
+				"          {Purchase Date} as string,",
+				"          {Delivery Date} as string,",
+				"          Review as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> penSalesdataflow"
+			]
+		}
+	}
+}
